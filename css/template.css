@@ -1,0 +1,20 @@
+.template {
+    padding: 40px 15px;
+    text-align: center;
+}
+
+.legislator-slot {
+    margin-bottom: 15px;
+}
+
+.legislator-slot .avatar {
+    margin-bottom: 5px;
+}
+
+.legislator-slot .identity .name {
+    font-size: 150%;
+}
+
+.legislator-slot .choice {
+    font-size: 150%;
+}
