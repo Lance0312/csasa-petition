@@ -4,11 +4,23 @@
 }
 
 .legislator-slot {
+    width: 150px;
+    float: left;
+    margin-left: 15px;
+    margin-right: 15px;
     margin-bottom: 15px;
 }
 
 .legislator-slot .avatar {
     margin-bottom: 5px;
+}
+
+.legislator-slot .identity {
+    padding: 0 24px;
+}
+
+.legislator-slot .identity .emblem {
+    float: left;
 }
 
 .legislator-slot .identity .name {

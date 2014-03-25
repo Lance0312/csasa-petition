@@ -42,7 +42,7 @@ function getChoice(choiceCode) {
 
 function createElement(data) {
     var div = document.createElement('div');
-    div.addClassName('legislator-slot col-xs-3 col-md-2');
+    div.addClassName('legislator-slot');
 
     var avatarDiv = document.createElement('div');
     avatarDiv.addClassName('avatar');
@@ -52,7 +52,7 @@ function createElement(data) {
     avatarDiv.appendChild(avatarImg);
 
     var emblemDiv = document.createElement('div');
-    emblemDiv.addClassName('emblem col-md-4');
+    emblemDiv.addClassName('emblem');
     var emblemImg = document.createElement('img');
     emblemImg.src = getEmblem(data.party);
     emblemImg.width = 32;
@@ -63,8 +63,6 @@ function createElement(data) {
     nameDiv.addClassName('name');
     nameDiv.update(data.name);
 
-    var tmpDiv = document.createElement('div');
-    tmpDiv.addClassName('col-md-10 col-md-offset-1 row');
     var identityDiv = document.createElement('div');
     identityDiv.addClassName('identity row');
 
@@ -73,9 +71,8 @@ function createElement(data) {
     choiceDiv.update(getChoice(data.choice));
 
     div.appendChild(avatarDiv);
-    tmpDiv.appendChild(emblemDiv);
-    tmpDiv.appendChild(nameDiv);
-    identityDiv.appendChild(tmpDiv);
+    identityDiv.appendChild(emblemDiv);
+    identityDiv.appendChild(nameDiv);
     div.appendChild(identityDiv);
     div.appendChild(choiceDiv);
 
