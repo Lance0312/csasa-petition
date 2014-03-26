@@ -30,3 +30,7 @@
 .legislator-slot .choice {
     font-size: 150%;
 }
+
+.choice-unknown {
+    color: #999999;
+}

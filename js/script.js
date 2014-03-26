@@ -26,10 +26,23 @@ function getEmblem(partyCode) {
 function getChoice(choiceCode) {
     switch (choiceCode) {
         case '0':
+        case '1':
+        case '2':
+            return choiceCode;
+            break;
+        default:
+            return '3';
+            break;
+    }
+}
+
+function getChoiceText(choiceCode) {
+    switch (choiceCode) {
+        case '0':
             return '不支持'
             break;
         case '1':
-            return '支持'
+            return '支&nbsp;&nbsp;&nbsp;持'
             break;
         case '2':
             return '不表態'
@@ -68,7 +81,10 @@ function createElement(data) {
 
     var choiceDiv = document.createElement('div');
     choiceDiv.addClassName('choice');
-    choiceDiv.update(getChoice(data.choice));
+    if (data.choice == '3') {
+        choiceDiv.addClassName('choice-unknown');
+    }
+    choiceDiv.update(getChoiceText(data.choice));
 
     div.appendChild(avatarDiv);
     identityDiv.appendChild(emblemDiv);
@@ -84,6 +100,7 @@ new Ajax.Request(url, {
     onSuccess: function(transport) {
         var data = transport.responseText.evalJSON();
         data.forEach(function(entry) {
+            entry.choice = getChoice(entry.choice);
             var div = createElement(entry);
             $('legislator-list').insert(div);
         });
