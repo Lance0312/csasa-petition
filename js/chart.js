@@ -156,6 +156,19 @@ function renderLegends(id, labels, colors) {
         .text(function (d) { return d.value; });
 }
 
+function getChoice(choiceCode) {
+    switch (choiceCode) {
+        case '0':
+        case '1':
+        case '2':
+            return choiceCode;
+            break;
+        default:
+            return '3';
+            break;
+    }
+}
+
 /* chart-1 */
 var chart1 = d3.select('#chart-1')
     .append('svg')
