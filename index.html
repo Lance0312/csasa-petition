@@ -40,7 +40,7 @@
           </div>
           <div class="name">{{ legislator.name | strip: "[a-zA-Z].*" }}</div>
         </div>
-        <div class="choice {{ legislator.choice | choiceClass }}" ng-class='{{ legislator.choice | choiceClass }}'>
+        <div class="choice {{ legislator.choice | choiceClass }}">
           {{ legislator.choice | toTextLabel }}
         </div>
       </div>
