@@ -74,7 +74,7 @@ function createElement(data) {
 
     var nameDiv = document.createElement('div');
     nameDiv.addClassName('name');
-    nameDiv.update(data.name);
+    nameDiv.update(data.name.replace(/[a-zA-Z].*/, ''));
 
     var identityDiv = document.createElement('div');
     identityDiv.addClassName('identity row');
