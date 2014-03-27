@@ -1,8 +1,11 @@
 var url = "data/mly-8.json";
 
-angular.module('app', ['legislatorFilters', 'stringFilters'])
-    .controller('LegislatorListCtrl', function ($scope, $http) {
-        $http.get(url).success(function(data) {
-            $scope.legislators = data;
+angular.module('app', ['legislatorFilters', 'stringFilters', 'firebase'])
+    .controller('LegislatorListCtrl', function ($scope, $http, $firebase) {
+        var dataRef = new Firebase('https://csasa-petition.firebaseio.com/');
+        $scope.legislators = $firebase(dataRef);
+
+        $scope.legislators.$on('loaded', function (data) {
+            renderChart1(data);
         });
     });

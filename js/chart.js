@@ -169,18 +169,17 @@ function getChoice(choiceCode) {
     }
 }
 
-/* chart-1 */
-var chart1 = d3.select('#chart-1')
-    .append('svg')
-    .append('g');
+function renderChart1(data) {
+    var chart1 = d3.select('#chart-1')
+        .append('svg')
+        .append('g');
 
-chart1.append('g').attr('class', 'slices');
-chart1.append('g').attr('class', 'labels');
-chart1.append('g').attr('class', 'lines');
+    chart1.append('g').attr('class', 'slices');
+    chart1.append('g').attr('class', 'labels');
+    chart1.append('g').attr('class', 'lines');
 
-chart1.attr('transform', 'translate(' + width / 2 + ', ' + height / 2 + ')');
+    chart1.attr('transform', 'translate(' + width / 2 + ', ' + height / 2 + ')');
 
-d3.json('data/mly-8.json', function (error, root) {
     var groupByChoice = d3.nest()
         .key(function (d) {
             d.choice = getChoice(d.choice);
@@ -189,7 +188,7 @@ d3.json('data/mly-8.json', function (error, root) {
         .rollup(function(leaves) {
             return { 'object': leaves, 'length': leaves.length };
         })
-        .entries(root)
+        .entries(data)
     renderPieChart(chart1, groupByChoice)
     renderLegends('#legend-chart-1', textLabels, sliceColors);
-});
+}
