@@ -30,7 +30,7 @@
   <div id="details">
     <h3>立委簽署狀況</h3>
     <div id="legislator-list" class="row" ng-controller="LegislatorListCtrl">
-      <div class="legislator-slot" ng-repeat="legislator in legislators | orderByPriority">
+      <div class="legislator-slot" ng-repeat="legislator in legislators | orderByPriority | orderBy: 'party'">
         <div class="avatar">
           <img ng-src='{{ legislator.avatar + "?size=large" }}'>
         </div>
