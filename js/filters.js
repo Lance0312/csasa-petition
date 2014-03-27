@@ -26,13 +26,13 @@ angular.module('legislatorFilters', [])
     .filter('toTextLabel', function() {
         return function (input) {
             switch (input) {
-                case '0':
+                case 0:
                     return '不支持'
                     break;
-                case '1':
+                case 1:
                     return '支持'
                     break;
-                case '2':
+                case 2:
                     return '不表態'
                     break;
                 default:
@@ -44,9 +44,9 @@ angular.module('legislatorFilters', [])
     .filter('choiceClass', function() {
         return function (input) {
             switch (input) {
-                case '0':
-                case '1':
-                case '2':
+                case 0:
+                case 1:
+                case 2:
                     break;
                 default:
                     return 'choice-unknown';

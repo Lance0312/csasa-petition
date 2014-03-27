@@ -11,17 +11,17 @@ var outerArc = d3.svg.arc()
     .outerRadius(radius * 0.9);
 
 var sliceColors = {
-    '0': '#ea0000',
-    '1': '#014fbb',
-    '2': '#999999',
-    '3': '#d9d9d9'
+    0: '#ea0000',
+    1: '#014fbb',
+    2: '#999999',
+    3: '#d9d9d9'
 };
 
 var textLabels = {
-    '0': '不支持',
-    '1': '支持',
-    '2': '不表態',
-    '3': '尚未表態'
+    0: '不支持',
+    1: '支持',
+    2: '不表態',
+    3: '尚未表態'
 };
 
 function midAngle(d) {
@@ -158,13 +158,13 @@ function renderLegends(id, labels, colors) {
 
 function getChoice(choiceCode) {
     switch (choiceCode) {
-        case '0':
-        case '1':
-        case '2':
+        case 0:
+        case 1:
+        case 2:
             return choiceCode;
             break;
         default:
-            return '3';
+            return 3;
             break;
     }
 }
