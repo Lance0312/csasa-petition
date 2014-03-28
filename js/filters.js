@@ -61,4 +61,14 @@ angular.module('stringFilters', [])
             var regex = new RegExp(regexString);
             return input.replace(regex, '');
         };
+    })
+    .filter('default', function () {
+        return function (input, defaultString) {
+            if (input == null | input == '') {
+                return defaultString;
+            }
+            else {
+                return input;
+            }
+        };
     });

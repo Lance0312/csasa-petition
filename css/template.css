@@ -3,6 +3,14 @@
     text-align: center;
 }
 
+#auth-button-avatar {
+    margin-right: 5px;
+}
+
+#auth-button-name {
+    font-weight: bold;
+}
+
 .legislator-slot {
     width: 150px;
     float: left;
@@ -39,4 +47,31 @@
     width: 600px;
     height: 500px;
     float: left;
+}
+
+.auth-provider {
+    margin: 0 15px;
+}
+
+.auth-provider .icon {
+    width: 66px;
+    height: 80px;
+    background-image: url(https://www.firebase.com/images/social-icons.png);
+    background-size: 465px 80px;
+}
+
+.auth-provider.facebook .icon {
+    background-position: 0 0;
+}
+
+.auth-provider.github .icon {
+    background-position: -132px 0;
+}
+
+.auth-provider.google .icon {
+    background-position: -398px 0;
+}
+
+.auth-provider.twitter .icon {
+    background-position: -66px 0;
 }
