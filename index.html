@@ -40,8 +40,19 @@
           </div>
           <div class="name">{{ legislator.name | strip: "[a-zA-Z].*" }}</div>
         </div>
-        <div class="choice {{ legislator.choice | choiceClass }}">
-          {{ legislator.choice | toTextLabel }}
+        <div class="choice">
+          <div class="btn-group">
+            <button id="choice-{{ legislator.id }}" type="button" class="btn btn-default dropdown-toggle {{ legislator.choice | choiceClass }}" data-toggle="dropdown">
+              {{ legislator.choice | toTextLabel }} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a ng-click="choose(legislator.id, 0)">不支持</a></li>
+              <li><a ng-click="choose(legislator.id, 1)">支持</a></li>
+              <li><a ng-click="choose(legislator.id, 2)">不表態</a></li>
+              <li class="divider"></li>
+              <li><a ng-click="choose(legislator.id, 3)">尚未表態</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -53,6 +64,8 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.3/d3.min.js" charset="utf-8"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
 <script src="//cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="js/app.js" charset="utf-8"></script>
 <script src="js/filters.js" charset="utf-8"></script>
 <script src="js/chart.js" charset="utf-8"></script>

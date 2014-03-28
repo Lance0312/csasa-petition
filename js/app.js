@@ -8,4 +8,10 @@ angular.module('app', ['legislatorFilters', 'stringFilters', 'firebase'])
         $scope.legislators.$on('loaded', function (data) {
             renderChart1(data);
         });
+
+        $scope.choose = function (id, choice) {
+            if (typeof choice != 'undefined') {
+                $scope.legislators.$child(id).$update({'choice': choice});
+            }
+        };
     });
