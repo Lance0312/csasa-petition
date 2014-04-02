@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app">
+<html lang="en" ng-app="app" ng-passcode>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,7 +72,7 @@
   <div id="details">
     <h3>立委簽署狀況</h3>
     <div id="legislator-list" class="row" ng-controller="LegislatorListCtrl">
-      <div class="legislator-slot" ng-repeat="legislator in legislators | orderByPriority | orderBy: 'party'">
+      <div class="legislator-slot party-{{ legislator.party }}" ng-repeat="legislator in legislators | orderByPriority | orderBy: 'party'">
         <div class="avatar">
           <img ng-src='{{ legislator.avatar + "?size=large" }}'>
         </div>

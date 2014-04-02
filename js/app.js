@@ -83,3 +83,41 @@ app.controller('AuthCtrl', function ($scope, authService) {
         }
     };
 });
+
+function checkKeyStrokes (first, second) {
+    if (!first || !second) {
+        return false;
+    }
+
+    if (first.length !== second.length) {
+        return false;
+    }
+
+    first.forEach(function (element, index) {
+        if (element !== second[index]) {
+            return false;
+        }
+    });
+
+    return true;
+}
+
+var passcodeQueue = [];
+
+app.directive('ngPasscode', function () {
+    return function (scope, element, attrs) {
+        element.bind("keypress", function (event) {
+            if (passcodeQueue.length === 0) {
+                setTimeout(function () { passcodeQueue = []; }, 1000);
+            }
+
+            passcodeQueue.push(event.which);
+
+            if (checkKeyStrokes(passcodeQueue, [97, 97, 98, 98, 97, 98, 99])) {
+                $('.party-KMT .avatar img')
+                    .attr('width', 128)
+                    .attr('src', 'http://image.kmt.org.tw/people/20090606164842.jpg');
+            }
+        });
+    };
+});
