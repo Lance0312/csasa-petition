@@ -97,6 +97,15 @@ function renderTextLabels(chart, data) {
                 var d2 = interpolate(t);
                 return midAngle(d2) < Math.PI ? 'start' : 'end';
             };
+        })
+        .tween('text', function (d) {
+            this._current = this._current || d;
+            var interpolate = d3.interpolate(this._current, d);
+            this._current = interpolate(0);
+            return function (t) {
+                var d2 = interpolate(t);
+                this.textContent = Math.round(d2.value) + ' 席' + textLabels[d2.data.key];
+            };
         });
 
     label.exit().remove();
@@ -129,25 +138,29 @@ function renderTextPolylines(chart, data) {
 
 function renderLegends(id, labels, colors) {
     var li = { w: 75, h:30, s: 3, r:3 };
-    var legend = d3.select(id).append('svg')
-        .attr('width', d3.keys(labels).length * (li.w + li.s))
-        .attr('height', li.h);
+    var legend = d3.select(id).select('svg');
 
-    var legendg = legend.selectAll('g')
+    if (legend.empty()) {
+        legend = d3.select(id).append('svg')
+            .attr('width', d3.keys(labels).length * (li.w + li.s))
+            .attr('height', li.h);
+    }
+
+    legend = legend.selectAll('g')
         .data(d3.entries(colors))
         .enter().append('g')
         .attr('transform', function (d, i) {
             return 'translate(' + i * (li.w + li.s) + ', 0)';
         });
 
-    legendg.append('rect')
+    legend.append('rect')
         .attr('rx', li.r)
         .attr('ry', li.r)
         .attr('width', li.w)
         .attr('height', li.h)
         .style('fill', function (d) { return d.value; });
 
-    legendg.append('text')
+    legend.append('text')
         .data(d3.entries(labels))
         .attr('x', li.w / 2)
         .attr('y', li.h / 2)
@@ -171,12 +184,21 @@ function getChoice(choiceCode) {
 
 function renderChart1(data) {
     var chart1 = d3.select('#chart-1')
-        .append('svg')
-        .append('g');
+        .select('#body-chart-1')
+        .select('g');
 
-    chart1.append('g').attr('class', 'slices');
-    chart1.append('g').attr('class', 'labels');
-    chart1.append('g').attr('class', 'lines');
+    if (chart1.empty()) {
+        chart1 = d3.select('#chart-1')
+            .append('svg').attr('id', 'body-chart-1')
+            .append('g');
+    }
+
+    chart1.selectAll('.slices').data([null])
+        .enter().append('g').attr('class', 'slices');
+    chart1.selectAll('.labels').data([null])
+        .enter().append('g').attr('class', 'labels');
+    chart1.selectAll('.lines').data([null])
+        .enter().append('g').attr('class', 'lines');
 
     chart1.attr('transform', 'translate(' + width / 2 + ', ' + height / 2 + ')');
 

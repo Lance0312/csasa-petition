@@ -19,8 +19,8 @@ app.controller('LegislatorListCtrl', function ($scope, $http, $firebase, authSer
     var dataRef = new Firebase('https://csasa-petition.firebaseio.com/data');
     $scope.legislators = $firebase(dataRef);
 
-    $scope.legislators.$on('loaded', function (data) {
-        renderChart1(data);
+    $scope.legislators.$on('value', function (data) {
+        renderChart1(data.snapshot.value);
     });
 
     $scope.auth = authService.getHandler();
