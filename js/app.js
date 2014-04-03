@@ -20,12 +20,18 @@ app.service('dataService', function ($firebase) {
     return $firebase(ref);
 });
 
-app.controller('LegislatorListCtrl', function ($scope, authService, dataService) {
-    dataService.$bind($scope, 'legislators');
-
+app.controller('ChartCtrl', function ($scope, $window, dataService) {
     dataService.$on('value', function (d) {
         renderChart1(d.snapshot.value);
+
+        angular.element($window).bind('resize', function () {
+            renderChart1(d.snapshot.value);
+        });
     });
+});
+
+app.controller('LegislatorListCtrl', function ($scope, authService, dataService) {
+    dataService.$bind($scope, 'legislators');
 
     $scope.auth = authService.getHandler();
     $scope.choose = function (id, choice) {

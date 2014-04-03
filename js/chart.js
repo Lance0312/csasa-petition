@@ -1,14 +1,8 @@
-var width = $('#chart-1').width();
-var height = width * 0.75;
-var radius = Math.min(width, height) / 2;
-
-var innerArc = d3.svg.arc()
-    .innerRadius(radius * 0.5)
-    .outerRadius(radius * 0.8);
-
-var outerArc = d3.svg.arc()
-    .innerRadius(radius * 0.9)
-    .outerRadius(radius * 0.9);
+var width;
+var height;
+var radius;
+var innerArc;
+var outerArc;
 
 var sliceColors = {
     0: '#ea0000',
@@ -183,8 +177,22 @@ function getChoice(choiceCode) {
 }
 
 function renderChart1(data) {
+    width = $('#chart-1').width();
+    height = width * 0.75;
+    radius = Math.min(width, height) / 2;
+
+    innerArc = d3.svg.arc()
+        .innerRadius(radius * 0.5)
+        .outerRadius(radius * 0.8);
+
+    outerArc = d3.svg.arc()
+        .innerRadius(radius * 0.9)
+        .outerRadius(radius * 0.9);
+
     var chart1 = d3.select('#chart-1')
         .select('#body-chart-1')
+        .style('width', width)
+        .style('height', height)
         .select('g');
 
     if (chart1.empty()) {
