@@ -21,6 +21,9 @@
 
 .legislator-slot .avatar {
     margin-bottom: 5px;
+    width: 128px;
+    height: 128px;
+    overflow: hidden;
 }
 
 .legislator-slot .identity {
