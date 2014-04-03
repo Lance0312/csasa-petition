@@ -1,5 +1,5 @@
-var width = 600;
-var height = 350;
+var width = $('#chart-1').width();
+var height = width * 0.75;
 var radius = Math.min(width, height) / 2;
 
 var innerArc = d3.svg.arc()
@@ -73,7 +73,7 @@ function renderTextLabels(chart, data) {
         .append('text')
         .attr('dy', '.35em')
         .text(function (d) {
-            return d.value + ' 席' + textLabels[d.data.key];
+            return d.value + ' 席';
         });
 
     label.transition()
@@ -85,7 +85,7 @@ function renderTextLabels(chart, data) {
             return function (t) {
                 var d2 = interpolate(t);
                 var pos = outerArc.centroid(d2);
-                pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
+                pos[0] = radius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
                 return 'translate(' + pos + ')';
             };
         })
@@ -104,7 +104,7 @@ function renderTextLabels(chart, data) {
             this._current = interpolate(0);
             return function (t) {
                 var d2 = interpolate(t);
-                this.textContent = Math.round(d2.value) + ' 席' + textLabels[d2.data.key];
+                this.textContent = Math.round(d2.value) + ' 席';
             };
         });
 
@@ -128,7 +128,7 @@ function renderTextPolylines(chart, data) {
             return function (t) {
                 var d2 = interpolate(t);
                 var pos = outerArc.centroid(d2);
-                pos[0] = radius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
+                pos[0] = radius * 0.90 * (midAngle(d2) < Math.PI ? 1 : -1);
                 return [innerArc.centroid(d2), outerArc.centroid(d2), pos];
             };
         });
@@ -190,6 +190,8 @@ function renderChart1(data) {
     if (chart1.empty()) {
         chart1 = d3.select('#chart-1')
             .append('svg').attr('id', 'body-chart-1')
+            .style('width', width)
+            .style('height', height)
             .append('g');
     }
 
