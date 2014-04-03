@@ -15,18 +15,22 @@ app.service('authService', function($firebase, $firebaseSimpleLogin) {
     };
 });
 
-app.controller('LegislatorListCtrl', function ($scope, $http, $firebase, authService) {
-    var dataRef = new Firebase('https://csasa-petition.firebaseio.com/data');
-    $scope.legislators = $firebase(dataRef);
+app.service('dataService', function ($firebase) {
+    var ref = new Firebase('https://csasa-petition.firebaseio.com/data');
+    return $firebase(ref);
+});
 
-    $scope.legislators.$on('value', function (data) {
-        renderChart1(data.snapshot.value);
+app.controller('LegislatorListCtrl', function ($scope, authService, dataService) {
+    dataService.$bind($scope, 'legislators');
+
+    dataService.$on('value', function (d) {
+        renderChart1(d.snapshot.value);
     });
 
     $scope.auth = authService.getHandler();
     $scope.choose = function (id, choice) {
         if (typeof choice != 'undefined') {
-            $scope.legislators.$child(id).$update({'choice': choice})
+            dataService.$child(id).$update({'choice': choice})
                 .then(function (result) {
                     authService.log({
                         user: $scope.auth.user,
