@@ -1,0 +1,31 @@
+{
+  "name": "csasa-petition",
+  "version": "0.0.1",
+  "author": "Lance Chen <cyen0312@gmail.com>",
+  "description": "Legislator petition for Cross-Strait Agreement Supervision Act",
+  "scripts": {
+    "build": "gulp build",
+    "start": "gulp dev",
+    "deploy": "gulp deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lance0312/csasa-petition"
+  },
+  "keywords": [
+    "csasa",
+    "FuMao",
+    "legislators",
+    "act"
+  ],
+  "devDependencies": {
+    "express": "~3.5.1",
+    "gulp": "~3.6.0",
+    "gulp-concat": "~2.2.0",
+    "gulp-gh-pages": "~0.1.4",
+    "gulp-uglify": "~0.2.1",
+    "gulp-util": "~2.2.14",
+    "streamqueue": "~0.0.6"
+  },
+  "license": "MIT"
+}
