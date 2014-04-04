@@ -2,7 +2,7 @@ var url = "data/mly-8.json";
 
 var app = angular.module('app', ['legislatorFilters', 'stringFilters', 'firebase']);
 
-app.service('authService', function($firebase, $firebaseSimpleLogin) {
+app.service('authService', ['$firebaseSimpleLogin', function($firebaseSimpleLogin) {
     var authRef = new Firebase('https://csasa-petition.firebaseio.com/auth');
 
     return {
@@ -13,14 +13,14 @@ app.service('authService', function($firebase, $firebaseSimpleLogin) {
             return $firebase(authRef).$child('log').$add(data);
         }
     };
-});
+}]);
 
-app.service('dataService', function ($firebase) {
+app.service('dataService', ['$firebase', function ($firebase) {
     var ref = new Firebase('https://csasa-petition.firebaseio.com/data');
     return $firebase(ref);
-});
+}]);
 
-app.controller('ChartCtrl', function ($scope, $window, dataService) {
+app.controller('ChartCtrl', ['$scope', '$window', 'dataService', function ($scope, $window, dataService) {
     dataService.$on('value', function (d) {
         renderChart1(d.snapshot.value);
 
@@ -28,9 +28,9 @@ app.controller('ChartCtrl', function ($scope, $window, dataService) {
             renderChart1(d.snapshot.value);
         });
     });
-});
+}]);
 
-app.controller('LegislatorListCtrl', function ($scope, authService, dataService) {
+app.controller('LegislatorListCtrl', ['$scope', 'authService', 'dataService', function ($scope, authService, dataService) {
     dataService.$bind($scope, 'legislators');
 
     $scope.auth = authService.getHandler();
@@ -50,9 +50,9 @@ app.controller('LegislatorListCtrl', function ($scope, authService, dataService)
                 });
         }
     };
-});
+}]);
 
-app.controller('AuthCtrl', function ($scope, authService) {
+app.controller('AuthCtrl', ['$scope', 'authService', function ($scope, authService) {
     $scope.auth = authService.getHandler();
     $scope.checkAuth = function () {
         $scope.auth.$getCurrentUser()
@@ -92,7 +92,7 @@ app.controller('AuthCtrl', function ($scope, authService) {
                 break;
         }
     };
-});
+}]);
 
 function checkKeyStrokes (first, second) {
     if (!first || !second) {
@@ -114,7 +114,7 @@ function checkKeyStrokes (first, second) {
 
 var passcodeQueue = [];
 
-app.directive('ngPasscode', function () {
+app.directive('ngPasscode', [function () {
     return function (scope, element, attrs) {
         element.bind("keypress", function (event) {
             if (passcodeQueue.length === 0) {
@@ -130,4 +130,4 @@ app.directive('ngPasscode', function () {
             }
         });
     };
-});
+}]);
